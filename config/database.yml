@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  password: nelly 
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: nell_blog_development
+
+test:
+  <<: *default
+  database: nell_blog_test
+
+production:
+  <<: *default
+  database: nell_blog_production
+  username: nell_blog
+  password: <%= ENV["NELL_BLOG_DATABASE_PASSWORD"] %>
