@@ -65,13 +65,15 @@ Navigate to the project folder:
 ### **Install**<a name="install"></a>
 
 1. **Install Ruby Gems:**
-  Install project dependencies using Bundler:
+
+    Install project dependencies using Bundler:
     ```bash
     bundle install
     ```
 
 2. **Install Node.js Dependencies:**
-  This project has additional dependencies specified in `package.json`, install them using npm:
+  
+    This project has additional dependencies specified in `package.json`, install them using npm:
     ```bash
     npm install
     ```
@@ -83,7 +85,8 @@ Navigate to the project folder:
     This step ensures that your development environment has all the required packages.
 
 3. **Database Setup:**
-  Set up the database by running the following commands:
+  
+    Set up the database by running the following commands:
     ```bash
     rails db:create
     rails db:migrate
