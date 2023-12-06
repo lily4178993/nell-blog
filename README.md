@@ -1,9 +1,8 @@
 # Nell Blog <a name="readme-top"></a>
 
-A dynamic Ruby on Rails-based blog platform designed to showcase a curated list of posts. It encourages reader engagement through features such as the ability to add comments and express appreciation for posts by liking them.
-
 ## Table of Contents
 
+- [About Project](#about-project)
 - [Built With](#built-with)
 - [Tech Stack](#tech-stack)
 - [Key Features](#key-features)
@@ -19,6 +18,9 @@ A dynamic Ruby on Rails-based blog platform designed to showcase a curated list 
 - [Show your support](#show-your-support)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
+
+## **About Project** <a name="about-project"></a>
+**Nell Blog** is a dynamic Ruby on Rails-based blog platform designed to showcase a curated list of posts. It encourages reader engagement through features such as the ability to add comments and express appreciation for posts by liking them.
 
 ## **Built With** <a name="built-with"></a>
 
