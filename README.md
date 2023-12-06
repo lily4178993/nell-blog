@@ -6,7 +6,7 @@
 - [Built With](#built-with)
 - [Tech Stack](#tech-stack)
 - [Key Features](#key-features)
-- [Live Demo](#live-demo)
+<!-- - [Live Demo](#live-demo) -->
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
@@ -40,9 +40,9 @@
 - Reader engagement through comments
 - Post appreciation with likes
 
-## **Live Demo**<a name="live-demo"></a>
+<!-- ## **Live Demo**<a name="live-demo"></a>
 
-[Live Demo](#) (Coming Soon)
+[Live Demo](#) (Coming Soon) -->
 
 ## **Getting Started**<a name="getting-started"></a>
 
