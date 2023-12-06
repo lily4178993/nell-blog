@@ -15,6 +15,6 @@ class Post < ApplicationRecord
 
   # A method that updates the posts count for a user.
   def user_posts_count
-    author.update(posts_count: author.posts.count)
+    author.update(posts_counter: author.posts.count)
   end
 end
