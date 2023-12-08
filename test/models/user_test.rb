@@ -36,6 +36,6 @@ class UserTest < ActiveSupport::TestCase
 
     # Ensure only the 3 most recent posts are returned
     expected_posts = user.posts.order(created_at: :desc).limit(3)
-    assert_equal expected_posts, user.recent_posts
+    assert_equal expected_posts, user.recent_posts, 'Recent posts should match the expected list'
   end
 end
