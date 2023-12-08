@@ -12,6 +12,7 @@
   - [Setup](#setup)
   - [Install](#install)
 - [Usage](#usage)
+- [Tests](#tests)
 - [Author](#author)
 - [Future Features](#future-features)
 - [Contributing](#contributing)
@@ -101,6 +102,23 @@ To start the Rails server, run:
   rails server
   ```
 Visit `http://localhost:3000` in your browser to explore the Nell Blog platform.
+
+## **Tests** <a name="tests"></a>
+The Nell Blog application comes with a suite of tests to ensure the reliability and correctness of its functionality.
+
+To run all the tests for the Nell Blog application, follow these steps:
+1. **Run Migrations in the Test Database:**
+
+    Ensure the test database is up-to-date by migrating tables:
+    ```bash
+    rails db:migrate RAILS_ENV=test
+    ```
+2. **Execute Tests:**
+
+    Run all tests using the following command:
+    ```bash
+    rails test
+    ```
 
 ## **Author** <a name="author"></a>
 
