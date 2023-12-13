@@ -17,6 +17,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(params.require(:post).permit(:title, :text))
+    current_user = User.find_by(id: params[:user_id])
     @post.author = current_user
     if @post.save
       flash[:success] = 'Post created successfully'
