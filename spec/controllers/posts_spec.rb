@@ -62,9 +62,9 @@ RSpec.describe PostsController, type: :controller do
     it 'creates a new post' do
       post_params = { title: 'Test Post', text: 'This is a test post' }
 
-      expect {
+      expect do
         post :create, params: { user_id: user.id, post: post_params }
-      }.to change(Post, :count).by(1)
+      end.to change(Post, :count).by(1)
 
       expect(response).to redirect_to(user_post_path(user, assigns(:post)))
       expect(flash[:success]).to eq('Post created successfully')
