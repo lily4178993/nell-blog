@@ -6,10 +6,10 @@ RSpec.describe LikesController, type: :controller do
 
   describe 'POST #create' do
     it 'creates a new like' do
-      like = Like.create(user_id: user.id, post_id: post.id)
-      expect {
+      Like.create(user_id: user.id, post_id: post.id)
+      expect do
         post.reload
-      }.to change { post.likes_counter }.by(1)
+      end.to change { post.likes_counter }.by(1)
 
       flash[:success] = 'Post liked successfully'
       redirect_to(user_post_path(post.author, post))
@@ -24,12 +24,12 @@ RSpec.describe LikesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:like) { Like.create(user: user, post: post) }
+    let!(:like) { Like.create(user:, post:) }
 
     it 'destroys the like' do
-      expect {
+      expect do
         delete :destroy, params: { user_id: user.id, post_id: post.id, id: like.id }
-      }.to change(Like, :count).by(-1)
+      end.to change(Like, :count).by(-1)
 
       flash[:success] = 'Post unliked successfully'
       redirect_to(user_post_path(post.author, post))
