@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
   def create
+    current_user = User.find_by(id: params[:user_id])
     @post = Post.find_by(id: params[:post_id])
     @like = Like.new(user: current_user, post: @post)
     if @like.save
@@ -11,6 +12,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
+    current_user = User.find_by(id: params[:user_id])
     @post = Post.find_by(id: params[:post_id])
     @like = Like.find_by(user: current_user, post: @post)
     if @like.destroy
