@@ -30,9 +30,9 @@ RSpec.describe CommentsController, type: :controller do
     context 'with valid parameters' do
       it 'creates a new comment' do
         Comment.create(post_id: post.id, user_id: user.id, text: 'This is a comment.')
-        expect {
+        expect do
           post.reload
-        }.to change { post.comments_counter }.by(1)
+        end.to change { post.comments_counter }.by(1)
 
         flash[:success] = 'Comment created successfully'
         redirect_to(user_post_path(post.author, post))
@@ -42,9 +42,9 @@ RSpec.describe CommentsController, type: :controller do
     context 'with invalid parameters' do
       it 'renders the new template on failure' do
         Comment.create(post_id: post.id, user_id: user.id, text: '')
-        expect {
+        expect do
           post.reload
-        }.to change { post.comments_counter }.by(0)
+        end.to change { post.comments_counter }.by(0)
 
         flash.now[:error] = 'Comment could not be created'
 
@@ -55,12 +55,12 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:comment) { Comment.create(user: user, post: post, text: 'This is a comment.') }
+    let!(:comment) { Comment.create(user:, post:, text: 'This is a comment.') }
 
     it 'destroys the comment' do
-      expect {
+      expect do
         delete :destroy, params: { user_id: user.id, post_id: post.id, id: comment.id }
-      }.to change(Comment, :count).by(-1)
+      end.to change(Comment, :count).by(-1)
 
       flash[:success] = 'Comment deleted successfully'
       redirect_to(user_post_path(post.author, post))
