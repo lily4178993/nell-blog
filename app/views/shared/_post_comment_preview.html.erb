@@ -1,0 +1,9 @@
+<%= tag.div class: "flex gap-4 p-4 mb-4 bg-slate-50" do %>
+  <%= link_to user_path(comment.user) do %>
+    <h4 class="font-semibold text-sky-500">
+      <em><%= comment.user.name %></em>
+    </h4>
+  <% end %>
+  <div class="w-[1px] h-8 bg-slate-200"></div>
+  <p><%= comment.text %></p>
+<% end %>
