@@ -53,6 +53,9 @@ group :development, :test do
 
   gem 'rails-controller-testing'
   gem 'rspec-rails'
+
+  # Provides a simple API for performing paginated queries [https//github.com/mislav/will_paginate]
+  gem 'will_paginate'
 end
 
 group :development do
