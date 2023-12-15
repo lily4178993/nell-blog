@@ -1,3 +1,21 @@
-<h1>Posts#index</h1>
-<p>Here is the list of all posts</p>
-# <p>Find me in app/views/posts/index.html.erb</p>
+<!-- views/posts/index.html.erb -->
+
+<div class="container max-w-screen-md m-auto">
+  <%= render partial: "shared/user_card_header" , locals: { user: @user } %>
+  <div class="grid grid-cols-1">
+    <% @posts.each do |post| %>
+      <%= link_to user_post_path(@user, post) do %>
+        <%= render partial: "shared/post_card_preview", locals: { post: post } %>
+      <% end %>
+      <% if post.comments_counter == 0 %>
+        <em class="text-sm text-center text-gray-400 border-[1px] border-gray-100 -mt-8 mb-10 p-4">This post hasn't any comment yet.</em>
+      <% else %>
+        <div class="border-[1px] border-gray-100 -mt-8 mb-10 p-4">
+          <% post.recent_comments.each do |comment| %>
+            <%= render partial: "shared/post_comment_preview", locals: { comment: comment } %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
