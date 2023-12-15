@@ -9,12 +9,18 @@
   <div class="font-mono border-b-4 border-slate-50 p-4 mt-8">
     <p><%= @post.text %></p>
   </div>
-  <div>
-    <h3 class="font-semibold bg-slate-50 text-sky-400 shadow-md border-b-2 border-slate-600 p-2 pl-4 mt-8">Comments</h3>
+  <% if @post.comments_counter == 0 %> 
     <div class="font-mono border-slate-50 p-4 mt-8">
-      <% @post.comments.each do |comment| %>
-        <%= render partial: "shared/post_comment_preview" , locals: { comment: comment } %>
-      <% end %>
+      <p class="text-sm text-center text-gray-400 -mt-8 mb-10 p-4"><em>No comments yet</em></p>
     </div>
-  </div>
+  <% else %>
+    <div>
+      <h3 class="font-semibold bg-slate-50 text-sky-400 shadow-md border-b-2 border-slate-600 p-2 pl-4 mt-8">Comments</h3>
+      <div class="font-mono border-slate-50 p-4 mt-8">
+        <% @post.comments.each do |comment| %>
+          <%= render partial: "shared/post_comment_preview" , locals: { comment: comment } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
