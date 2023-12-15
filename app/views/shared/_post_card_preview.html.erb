@@ -1,0 +1,8 @@
+<%= tag.div id: dom_id(post), class: "card pb-8 mb-8 shadow-sm overflow-wrap relative" do %>
+<h3 class="font-semibold break-all bg-slate-50  text-sky-400 px-1"><span class="text-sky-200">Post: </span><%= post.title %></h3>
+  <p class="pl-1 pr-4 break-all"><%= truncate(post.text, length: 100) %></p>
+  <div class="flex gap-4 text-[0.7rem] absolute bottom-2 right-8">
+    <%= render partial: "shared/post_comments_counter_preview" , locals: { post: post } %>
+    <%= render partial: "shared/post_likes_counter_preview" , locals: { post: post } %>
+  </div>
+<% end %>

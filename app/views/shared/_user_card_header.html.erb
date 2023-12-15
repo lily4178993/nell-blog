@@ -1,0 +1,16 @@
+<%= tag.figure id: dom_id(user), class: "flex bg-slate-100 shadow-2xl rounded-xl p-8 md:p-0 mb-8 dark:bg-slate-800" do %>
+  <% if user.photo? %>
+    <%= image_tag user.photo, alt: user.name, class: "w-24 h-24 md:w-48 md:h-auto md:rounded-tl-xl md:rounded-bl-xl rounded-full mx-auto md:-ml-2" , width: "384" , height: "512" %>
+  <% else %>
+    <!-- Provide a fallback or placeholder image if user.photo is not attached -->
+    <%= image_tag "user_fallback_image.jpg" , alt: user.name, class: "w-24 h-24 md:w-48 md:h-auto md:rounded-tl-xl md:rounded-bl-xl rounded-full mx-auto md:-ml-2" , width: "384" , height: "512" %>
+  <% end %>
+  <div class="w-2/3 pt-6 md:p-8 text-left space-y-4 md:relative">
+    <figcaption class="font-medium text-4xl md:text-5xl">
+      <div class="text-sky-500 dark:text-sky-400">
+        <%= user.name %>
+      </div>
+    </figcaption>
+    <p class="font-mono text-right md:absolute md:bottom-8 md:right-8">Number of posts: <span class="font-medium text-sky-500 dark:text-sky-400"><%= user.posts_counter %></span></p>
+  </div>
+<% end %>
