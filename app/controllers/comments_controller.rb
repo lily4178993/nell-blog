@@ -1,12 +1,12 @@
 class CommentsController < ApplicationController
+  before_action :set_post, only: [:new, :create, :destroy]
+
   def new
-    @post = Post.find_by(id: params[:post_id])
     @comment = @post.comments.new
   end
 
   def create
-    @post = Post.find_by(id: params[:post_id])
-    @comment = Comment.new(params.require(:comment).permit(:text))
+    @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.post = @post
     if @comment.save
@@ -19,7 +19,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by(id: params[:post_id])
     @comment = Comment.find_by(id: params[:id])
     if @comment.destroy
       flash[:success] = 'Comment deleted successfully'
@@ -27,5 +26,15 @@ class CommentsController < ApplicationController
       flash.now[:error] = 'Comment could not be deleted'
     end
     redirect_to user_post_path(@post.author, @post)
+  end
+
+  private
+
+  def set_post
+    @post = Post.find_by(id: params[:post_id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:text)
   end
 end

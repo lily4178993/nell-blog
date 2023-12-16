@@ -10,6 +10,7 @@ class PostsController < ApplicationController
   def show
     @user = User.find_by(id: params[:user_id])
     @post = @user.posts.find_by(id: params[:id])
+    @comment = Comment.new
     @comments = @user.posts.all
   end
 
