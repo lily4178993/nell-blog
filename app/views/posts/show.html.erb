@@ -2,14 +2,17 @@
   <h2 class="font-semibold break-all bg-slate-50  text-sky-400 shadow-md border-b-2 border-slate-600 p-2 pl-4"><%= @post.title %>
     <em class="text-sky-200">by <%= @user.name %></em>
   </h2>
-  <div class="flex gap-4 text-[0.7rem] absolute top-5 right-8">
+  <div class="flex gap-4 items-center text-[0.7rem] absolute top-12 right-8">
     <%= render partial: "shared/post_comments_counter_preview" , locals: { post: @post } %>
-    <%= render partial: "shared/post_likes_counter_preview" , locals: { post: @post } %>
+    <!-- Display the like/dislike button -->
+    <p class="font-mono text-right">Likes: <span class="font-medium text-sky-500 dark:text-sky-400"><%= @post.likes_counter %></span></p>
   </div>
   <div class="font-mono border-b-4 border-slate-50 p-4 mt-8">
     <p><%= @post.text %></p>
   </div>
-  <% if @post.comments_counter == 0 %> 
+  <% if @post.comments_counter == 0 %>
+    <!-- Display the like/dislike button -->
+    <%= render partial: "shared/post_likes_preview" , locals: { post: @post, like: @like } %>
     <div class="font-mono border-slate-50 p-4 mt-8">
       <p class="text-sm text-center text-gray-400 -mt-8 mb-10 p-4"><em>No comments yet</em></p>
     </div>
@@ -19,6 +22,8 @@
     </div>
   <% else %>
     <div>
+      <!-- Display the like button and count -->
+      <%= render partial: "shared/post_likes_preview" , locals: { post: @post, like: @like } %>
       <h3 class="font-semibold bg-slate-50 text-sky-400 shadow-md border-b-2 border-slate-600 p-2 pl-4 mt-8">Comments</h3>
       <div class="font-mono border-slate-50 p-4 mt-8">
         <% @post.comments.each do |comment| %>

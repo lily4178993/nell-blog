@@ -1,0 +1,13 @@
+<div class="flex gap-4 items-center">
+  <!-- Like Button (Like Action) -->
+  <%= form_with(model: [@user, @post, Like.new], url: user_post_likes_path(@user, @post), method: :post, local: true, class: "like-form w-fit text-lg font-bold text-red-700 border-2 rounded-full px-2", data: { turbo_frame: "posts" }) do |form| %>
+    <%= form.submit 'Like', class: "cursor-pointer", disabled: @like.present? %>
+  <% end %>
+
+  <!-- Unlike Button (Unlike Action) -->
+  <% if @like.present? %>
+    <%= form_with(model: [@user, @post, @like], url: user_post_like_path(@user, @post, @like), method: :delete, local: true, class: "like-form w-fit text-lg font-bold text-slate-500 border-2 rounded-full px-2", data: { turbo_frame: "posts" }) do |form| %>
+      <%= form.submit 'Dislike', class: "cursor-pointer" %>
+    <% end %>
+  <% end %>
+</div>
