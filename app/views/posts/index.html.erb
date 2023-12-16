@@ -1,14 +1,17 @@
-<!-- views/posts/index.html.erb -->
-
 <div class="container max-w-screen-md m-auto">
   <%= render partial: "shared/user_card_header" , locals: { user: @user } %>
   <div class="grid grid-cols-1">
+    <!-- Trigger button to open the modal -->
+    <%= button_tag("Add a new post", class: "bg-blue-500 text-white px-4 py-2 rounded-md mb-4" , onclick: 'openModal()' ) %>
+    
+    <!-- Render the modal content using the partial -->
+    <%= render partial: "shared/post_creation_modal_form", locals: { user: @user, post: Post.new } %>
     <% @posts.each do |post| %>
       <%= link_to user_post_path(@user, post) do %>
         <%= render partial: "shared/post_card_preview", locals: { post: post } %>
       <% end %>
       <% if post.comments_counter == 0 %>
-        <em class="text-sm text-center text-gray-400 border-[1px] border-gray-100 -mt-8 mb-10 p-4">This post hasn't any comment yet.</em>
+        <em class="text-sm text-center text-gray-400 border-[1px] border-gray-100 -mt-8 mb-10 p-4">No comments yet.</em>
       <% else %>
         <div class="border-[1px] border-gray-100 -mt-8 mb-10 p-4">
           <% post.recent_comments.each do |comment| %>

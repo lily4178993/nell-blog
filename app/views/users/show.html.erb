@@ -4,6 +4,13 @@
     <h2 class="font-bold text-3xl">Bio</h2>
     <p><%= @user.bio %></p>
   </div>
+
+  <!-- Trigger button to open the modal -->
+  <%= button_tag("Add a new post", class: "bg-blue-500 text-white px-4 py-2 rounded-md mb-4" , onclick: 'openModal()' ) %>
+  
+  <!-- Render the modal content using the partial -->
+  <%= render partial: "shared/post_creation_modal_form", locals: { user: @user, post: Post.new } %>
+
   <div class="font-mono border-b-2 mt-14 mb-8">
     <% if @posts.any? %>
       <div class="grid grid-cols-1">
