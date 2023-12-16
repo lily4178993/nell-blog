@@ -9,11 +9,10 @@ class PostsController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:user_id])
     @post = @user.posts.find_by(id: params[:id])
     @comment = Comment.new
     @comments = @user.posts.all
-    @like = Like.find_by(user: current_user, post: @post)
+    @like = Like.find_by(user: @user, post: @post)
   end
 
   def new
@@ -23,7 +22,7 @@ class PostsController < ApplicationController
 
   def create
     @post = @user.posts.new(post_params)
-    @post.author = current_user
+    @post.author = @user
     if @post.save
       flash[:success] = 'Post created successfully'
       redirect_to user_post_path(@user, @post)

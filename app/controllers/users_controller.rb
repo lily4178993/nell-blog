@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     @posts = @user.recent_posts
-    @post = @user.posts.first
+    @post = @user.posts
     @like = @post.present? ? Like.find_by(user: current_user, post: @post) : nil
   end
 end
