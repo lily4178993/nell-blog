@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
+  before_action :set_user, only: [:index, :show, :new, :create]
+
   def index
     @user = User.find_by(id: params[:user_id])
+    @post = Post.new
     @posts = @user.posts.all.paginate(page: params[:page], per_page: 2)
   end
 
@@ -16,12 +19,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params.require(:post).permit(:title, :text))
-    current_user = User.find_by(id: params[:user_id])
+    @post = @user.posts.new(post_params)
     @post.author = current_user
     if @post.save
       flash[:success] = 'Post created successfully'
-      redirect_to user_post_path(current_user, @post)
+      redirect_to user_post_path(@user, @post)
     else
       flash.now[:error] = 'Post could not be created'
       render 'new'
@@ -32,5 +34,15 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     @post.destroy
     redirect_to user_posts_path
+  end
+
+  private
+
+  def set_user
+    @user = User.find_by(id: params[:user_id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :text)
   end
 end

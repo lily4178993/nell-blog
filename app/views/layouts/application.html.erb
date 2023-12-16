@@ -17,4 +17,31 @@
       <%= yield %>
     </main>
   </body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // JavaScript function to open the modal
+      window.openModal = function () {
+        document.getElementById('modal').style.display = 'flex';
+
+        // Close modal when clicking outside
+        window.addEventListener('click', closeModalOutside);
+      };
+
+      // Function to close the modal
+      window.closeModal = function () {
+        document.getElementById('modal').style.display = 'none';
+
+        // Remove the click event listener
+        window.removeEventListener('click', closeModalOutside);
+      };
+
+      // Function to close the modal when clicking outside
+      function closeModalOutside(event) {
+        var modal = document.getElementById('modal');
+        if (event.target === modal) {
+          window.closeModal();
+        }
+      }
+    });
+  </script>
 </html>

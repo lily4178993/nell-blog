@@ -1,0 +1,17 @@
+<%= form_with(model: [@user, @post], url: user_posts_path(@user), local: true) do |form| %>
+  <div class="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md p-6">
+
+    <div class="mb-4">
+      <%= form.label :title, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :title, class: "form-input mt-1 p-2 w-full rounded-md border border-gray-300" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :text, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_area :text, class: "form-input mt-1 p-2 w-full rounded-md border border-gray-300" %>
+    </div>
+
+    <%= button_tag("Reset", type: 'reset', class: "bg-blue-500 text-white px-4 py-2 rounded-md mr-2") %>
+    <%= form.submit "Create Post", class: "bg-green-500 text-white px-4 py-2 rounded-md" %>
+  </div>
+<% end %>

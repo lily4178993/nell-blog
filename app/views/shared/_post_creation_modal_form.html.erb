@@ -1,0 +1,7 @@
+<div id="modal" class="z-20">
+  <div class="modal-content relative">
+    <button type="button" onclick="closeModal()" class="absolute top-0 right-0 mt-4 mr-4 px-2 rounded-full text-2xl text-slate-200 bg-slate-800">X</button>
+    <%= render partial: "posts/form", locals: { user: @user, post: Post.new }
+    %>
+  </div>
+</div>
