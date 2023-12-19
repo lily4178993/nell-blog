@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'users/show', type: :view do
   let(:user) { User.create(id: 1, name: 'John Doe', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Lorem ipsum', posts_counter: 5) }
-  let!(:posts) { [Post.create(id: 1, author: user, title: 'Title 1', text: 'Body 1'),
-                  Post.create(id: 2, author: user, title: 'Title 2', text: 'Body 2'),
-                  Post.create(id: 3, author: user, title: 'Title 3', text: 'Body 3')] }
+  let!(:posts) do
+    [Post.create(id: 1, author: user, title: 'Title 1', text: 'Body 1'),
+     Post.create(id: 2, author: user, title: 'Title 2', text: 'Body 2'),
+     Post.create(id: 3, author: user, title: 'Title 3', text: 'Body 3')]
+  end
 
   before do
     assign(:user, user)

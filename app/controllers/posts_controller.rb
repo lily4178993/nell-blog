@@ -4,7 +4,8 @@ class PostsController < ApplicationController
   def index
     @user = User.includes(posts: %i[comments likes]).find_by(id: params[:user_id])
     @post = Post.new
-    @posts = @user.posts.includes(:author, :likes, :comments).all.paginate(page: params[:page], per_page: 2).order('created_at DESC')
+    @posts = @user.posts.includes(:author, :likes, :comments).all.paginate(page: params[:page],
+                                                                           per_page: 2).order('created_at DESC')
     @like = @posts.present? ? Like.find_by(user: current_user, post: @posts.first) : nil
   end
 
