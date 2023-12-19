@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def show
     @post = @user.posts.includes(:comments, :likes).find_by(id: params[:id])
     @comment = Comment.new
-    @comments = @post.comments
+    @comments = @post.comments.includes(:author).order('created_at DESC')
     @like = Like.find_by(user: @user, post: @post)
   end
 
