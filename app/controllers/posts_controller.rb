@@ -2,16 +2,16 @@ class PostsController < ApplicationController
   before_action :set_user, only: %i[index show new create]
 
   def index
-    @user = User.find_by(id: params[:user_id])
+    @user = User.includes(posts: [:comments, :likes]).find_by(id: params[:user_id])
     @post = Post.new
-    @posts = @user.posts.all.paginate(page: params[:page], per_page: 2)
-    @like = @post.present? ? Like.find_by(user: current_user, post: @post) : nil
+    @posts = @user.posts.includes(:likes, :comments).all.paginate(page: params[:page], per_page: 2)
+    @like = @posts.present? ? Like.find_by(user: current_user, post: @posts.first) : nil
   end
 
   def show
-    @post = @user.posts.find_by(id: params[:id])
+    @post = @user.posts.includes(:comments, :likes).find_by(id: params[:id])
     @comment = Comment.new
-    @comments = @user.posts.all
+    @comments = @post.comments
     @like = Like.find_by(user: @user, post: @post)
   end
 
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by(id: params[:user_id])
+    @user = User.includes(posts: [:comments, :likes]).find_by(id: params[:user_id])
   end
 
   def post_params

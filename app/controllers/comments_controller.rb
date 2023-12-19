@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.includes(:comments).find_by(id: params[:post_id])
   end
 
   def comment_params
