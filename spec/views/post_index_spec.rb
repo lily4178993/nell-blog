@@ -24,11 +24,11 @@ RSpec.feature 'User posts index page', type: :feature do
     expect(page).to have_content(Post.first.text)
     expect(page).to have_content(Post.first.comments_counter)
     expect(page).to have_content(Post.first.likes_counter)
-    expect(page).to have_content(Comment.first.text)
+    expect(page).to have_content(Post.first.comments.first.text)
   end
 
-  scenario 'User sees pagination section on index page to see more posts' do
-    expect(page).to have_css('.post-container', count: 2)
+  scenario 'User can see a section for pagination if there are more posts than fit on the view' do
+    expect(page).to have_css('.pagination-container')
   end
 
   scenario "User can redirect to a post's show page, when click" do
