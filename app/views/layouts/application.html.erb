@@ -13,6 +13,14 @@
   </head>
 
   <body>
+    <div class ="absolute top-0 right-0 bg-slate-700 text-slate-50">
+      <% if alert.present? || notice.present? %>
+        <div class="border-2 p-2">
+          <%= alert %>
+          <%= notice %>
+        </div>
+      <% end %>
+    </div>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
