@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
+    @user = User.includes(posts: %i[comments likes]).find_by(id: params[:id])
     @posts = @user.recent_posts
-    @post = @user.posts
-    @like = @post.present? ? Like.find_by(user: current_user, post: @post) : nil
+    @post = Post.new
+    @like = @posts.present? ? Like.find_by(user: current_user, post: @posts.first) : nil
   end
 end
