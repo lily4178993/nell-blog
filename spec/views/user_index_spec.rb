@@ -1,12 +1,12 @@
 # Path: spec/views/user_index_spec.rb
 require 'rails_helper'
 RSpec.describe 'users/index', type: :view do
-  let(:user) { User.new(id: 1, name: 'John Doe', bio: 'Lorem ipsum', posts_counter: 5) }
+  let(:user) { User.create(id: 1, name: 'John Doe', bio: 'Lorem ipsum', posts_counter: 5) }
 
   let(:other_users) do
-    [User.new(id: 2, name: 'User1', bio: 'Bio1', posts_counter: 3),
-     User.new(id: 3, name: 'User2', bio: 'Bio2', posts_counter: 7),
-     User.new(id: 4, name: 'User3', bio: 'Bio3', posts_counter: 2)]
+    (2..4).map do |i|
+      User.create(id: i, name: "User#{i}", bio: "Bio#{i}", posts_counter: i * 2)
+    end
   end
 
   before do
@@ -20,7 +20,6 @@ RSpec.describe 'users/index', type: :view do
   end
   it 'displays the profile picture for each user' do
     (other_users + [user]).each do |current_user|
-      # Adjust this expectation based on how your actual view renders the image
       expect(rendered).to have_selector("img[src*='#{current_user.photo.url}']") if current_user.photo&.attached?
     end
   end
