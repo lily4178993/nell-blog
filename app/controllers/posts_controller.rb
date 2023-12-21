@@ -33,11 +33,11 @@ class PostsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @post = Post.find_by(id: params[:id])
-  #   @post.destroy
-  #   redirect_to user_posts_path
-  # end
+  def destroy
+    @post = Post.find_by(id: params[:id])
+    @post.destroy
+    redirect_to user_posts_path
+  end
 
   private
 
