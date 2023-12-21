@@ -62,7 +62,7 @@ group :development, :test do
 
   # Provides a simple API for performing paginated queries [https//github.com/mislav/will_paginate]
   gem 'will_paginate'
-  
+
   # CanCanCan is an authorization library for Ruby on Rails [https://github.com/CanCanCommunity/cancancan]
   gem 'cancancan'
 end
