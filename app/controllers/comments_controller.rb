@@ -18,15 +18,15 @@ class CommentsController < ApplicationController
     end
   end
 
-  def destroy
-    @comment = Comment.find_by(id: params[:id])
-    if @comment.destroy
-      flash[:success] = 'Comment deleted successfully'
-    else
-      flash.now[:error] = 'Comment could not be deleted'
-    end
-    redirect_to user_post_path(@post.author, @post)
-  end
+  # def destroy
+  #   @comment = Comment.find_by(id: params[:id])
+  #   if @comment.destroy
+  #     flash[:success] = 'Comment deleted successfully'
+  #   else
+  #     flash.now[:error] = 'Comment could not be deleted'
+  #   end
+  #   redirect_to user_post_path(@post.author, @post)
+  # end
 
   private
 

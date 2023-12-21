@@ -6,10 +6,10 @@ Rails.application.routes.draw do
 
   root "users#index" # Defines the root path route ("/")
 
-  resources :users, only: [:index, :show] do
-    resources :posts, only: [:index, :show, :new, :create, :destroy] do
-      resources :likes, only: [:create, :destroy]
-      resources :comments, only: [:new, :create, :destroy]
-    end
-  end
+  # resources :users, only: [:index, :show] do
+  #   resources :posts, only: [:index, :show, :new, :create, :destroy] do
+  #     resources :likes, only: [:create, :destroy]
+  #     resources :comments, only: [:new, :create, :destroy]
+  #   end
+  # end
 end
