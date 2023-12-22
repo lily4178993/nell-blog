@@ -6,6 +6,14 @@ Rails.application.routes.draw do
 
   root "users#index" # Defines the root path route ("/")
 
+  # The following routes are for the API.
+  namespace :api do
+    namespace :v1 do
+      resources :posts, only: [:index]
+    end
+  end
+
+  # The following routes are for the web app.
   resources :users, only: [:index, :show] do
     resources :posts, only: [:index, :show, :new, :create, :destroy] do
       resources :likes, only: [:create, :destroy]
