@@ -26,10 +26,10 @@ class PostsController < ApplicationController
     @post = @user.posts.new(post_params)
     @post.author = @user
     if @post.save
-      flash[:success] = 'Post created successfully'
+      flash[:notice] = 'Post created successfully'
       redirect_to user_post_path(@user, @post)
     else
-      flash.now[:error] = 'Post could not be created'
+      flash.now[:alert] = 'Post could not be created'
       render 'new'
     end
   end
@@ -38,9 +38,9 @@ class PostsController < ApplicationController
     @post = @user.posts.find_by(id: params[:id])
     authorize! :destroy, @post
     if @post.destroy
-      flash[:success] = 'Post deleted successfully'
+      flash[:notice] = 'Post deleted successfully'
     else
-      flash.now[:error] = 'Post could not be deleted'
+      flash.now[:alert] = 'Post could not be deleted'
     end
     redirect_to user_posts_path(@user)
   end
