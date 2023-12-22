@@ -1,14 +1,15 @@
 class LikesController < ApplicationController
   before_action :set_user_and_post
-  before_action :set_like, only: :destroy
+  before_action :set_like, only: %i[create destroy]
+  load_and_authorize_resource only: %i[create destroy]
 
   def create
     @like = Like.new(user: @user, post: @post)
 
     if @like.save
-      flash[:success] = 'Post liked successfully'
+      flash[:notice] = 'You liked this post'
     else
-      flash[:error] = 'Post could not be liked'
+      flash[:alert] = 'The post could not be liked'
     end
 
     redirect_to user_post_path(@user, @post)
@@ -16,9 +17,9 @@ class LikesController < ApplicationController
 
   def destroy
     if @like.destroy
-      flash[:success] = 'Post unliked successfully'
+      flash[:notice] = 'You unliked this post'
     else
-      flash[:error] = 'Post could not be unliked'
+      flash[:alert] = 'The post could not be unliked'
     end
 
     redirect_to user_post_path(@user, @post)

@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
-  has_many :posts, foreign_key: 'author_id'
-  has_many :comments
-  has_many :likes
+  has_many :posts, foreign_key: 'author_id', dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   # Validation: Name must not be blank
   validates :name, presence: true
@@ -14,5 +14,9 @@ class User < ApplicationRecord
   # A method that returns the 3 most recent posts for a given user.
   def recent_posts
     posts.order(created_at: :desc).limit(3)
+  end
+
+  def admin?
+    role == 'admin'
   end
 end

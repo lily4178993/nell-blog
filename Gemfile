@@ -54,8 +54,17 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
 
+  # Tailwind CSS is a utility-first CSS framework [https://tailwindcss.com]
+  gem 'tailwindcss-rails', '~> 2.0'
+
+  # Devise is a flexible authentication solution for Rails based on Warden [https://github.com/heartcombo/devise]
+  gem 'devise', '~> 4.9'
+
   # Provides a simple API for performing paginated queries [https//github.com/mislav/will_paginate]
   gem 'will_paginate'
+
+  # CanCanCan is an authorization library for Ruby on Rails [https://github.com/CanCanCommunity/cancancan]
+  gem 'cancancan'
 end
 
 group :development do
@@ -74,7 +83,3 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
 end
-
-gem 'tailwindcss-rails', '~> 2.0'
-
-gem 'devise', '~> 4.9'

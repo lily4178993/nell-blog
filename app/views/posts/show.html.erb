@@ -2,6 +2,11 @@
   <h2 class="font-semibold break-all bg-slate-50  text-sky-400 shadow-md border-b-2 border-slate-600 p-2 pl-4"><%= @post.title %>
     <em class="text-sky-200">by <%= @user.name %></em>
   </h2>
+    <% if @post.author == current_user %>
+      <% if can? :destroy, Post %>
+        <%= button_to "Delete Post" , user_post_path(@user, @post), method: :delete, data: { turbo_confirm: 'Are you sure? this action can not be undone' }, class: "absolute top-0 right-0 font-medium bg-red-600 hover:bg-red-500 text-slate-100 border-[1px] px-2 py-2" %>
+      <% end %>
+    <% end %>
   <div class="flex gap-4 items-center text-[0.7rem] absolute top-12 right-8">
     <%= render partial: "shared/post_comments_counter_preview" , locals: { post: @post } %>
     <!-- Display the like/dislike button -->
@@ -27,7 +32,14 @@
       <h3 class="font-semibold bg-slate-50 text-sky-400 shadow-md border-b-2 border-slate-600 p-2 pl-4 mt-8">Comments</h3>
       <div class="font-mono border-slate-50 p-4 mt-8">
         <% @post.comments.each do |comment| %>
-          <%= render partial: "shared/post_comment_preview" , locals: { comment: comment } %>
+          <div class="relative">
+            <%= render partial: "shared/post_comment_preview" , locals: { comment: comment } %>
+            <% if can? :destroy, comment %>
+              <%= button_to "Delete" , user_post_comment_path(comment.user, comment.post, comment), method: :delete, data: {
+                turbo_confirm: 'Are you sure? this action can not be undone' },
+                class: "absolute bottom-0 right-0 font-medium bg-red-600 hover:bg-red-500 text-slate-100 border-[1px] px-2 py-2" %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>

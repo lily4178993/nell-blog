@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_user, only: %i[index show new create]
+  before_action :set_user, only: %i[index show new create destroy]
+  load_and_authorize_resource only: %i[create destroy]
 
   def index
     @user = User.includes(posts: %i[comments likes]).find_by(id: params[:user_id])
@@ -25,18 +26,23 @@ class PostsController < ApplicationController
     @post = @user.posts.new(post_params)
     @post.author = @user
     if @post.save
-      flash[:success] = 'Post created successfully'
+      flash[:notice] = 'Post created successfully'
       redirect_to user_post_path(@user, @post)
     else
-      flash.now[:error] = 'Post could not be created'
+      flash.now[:alert] = 'Post could not be created'
       render 'new'
     end
   end
 
   def destroy
-    @post = Post.find_by(id: params[:id])
-    @post.destroy
-    redirect_to user_posts_path
+    @post = @user.posts.find_by(id: params[:id])
+    authorize! :destroy, @post
+    if @post.destroy
+      flash[:notice] = 'Post deleted successfully'
+    else
+      flash.now[:alert] = 'Post could not be deleted'
+    end
+    redirect_to user_posts_path(@user)
   end
 
   private
