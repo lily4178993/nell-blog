@@ -13,8 +13,11 @@ class Ability
     # User can destroy his own likes
     can :destroy, Like, user_id: user.id
 
-    # User can destroy his own posts and comments
-    can :destroy, [Post, Comment], author_id: user.id
+    # An author can destroy his own posts
+    can :destroy, Post, author_id: user.id
+
+    # User can destroy his own comments
+    can :destroy, Comment, user_id: user.id
 
     # User who is an admin can destroy any post and comment
     can :destroy, [Post, Comment] if user.role == 'admin'
