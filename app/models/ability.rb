@@ -20,6 +20,6 @@ class Ability
     can :destroy, Comment, user_id: user.id
 
     # User who is an admin can destroy any post and comment
-    can :destroy, [Post, Comment] if user.role == 'admin'
+    can :destroy, [Post, Comment] if user.admin?
   end
 end
