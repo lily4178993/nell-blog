@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
   before_action :set_user_and_post
-  before_action :set_like, only: :destroy
+  before_action :set_like, only: %i[create destroy]
+  load_and_authorize_resource only: %i[create destroy]
 
   def create
     @like = Like.new(user: @user, post: @post)

@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_user, only: %i[index show new create]
+  before_action :set_user, only: %i[index show new create destroy]
+  load_and_authorize_resource only: %i[create destroy]
 
   def index
     @user = User.includes(posts: %i[comments likes]).find_by(id: params[:user_id])
@@ -34,9 +35,14 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by(id: params[:id])
-    @post.destroy
-    redirect_to user_posts_path
+    @post = @user.posts.find_by(id: params[:id])
+    authorize! :destroy, @post
+    if @post.destroy
+      flash[:success] = 'Post deleted successfully'
+    else
+      flash.now[:error] = 'Post could not be deleted'
+    end
+    redirect_to user_posts_path(@user)
   end
 
   private

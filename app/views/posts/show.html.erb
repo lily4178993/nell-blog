@@ -2,6 +2,11 @@
   <h2 class="font-semibold break-all bg-slate-50  text-sky-400 shadow-md border-b-2 border-slate-600 p-2 pl-4"><%= @post.title %>
     <em class="text-sky-200">by <%= @user.name %></em>
   </h2>
+  <div class="absolute">
+    <% if can? :destroy, Post %>
+      <%= button_to "Delete Post" , user_post_path(@user, @post), method: :delete, data: { turbo_confirm: 'Are you sure? this action can not be undone' } %>
+    <% end %>
+  </div>
   <div class="flex gap-4 items-center text-[0.7rem] absolute top-12 right-8">
     <%= render partial: "shared/post_comments_counter_preview" , locals: { post: @post } %>
     <!-- Display the like/dislike button -->
