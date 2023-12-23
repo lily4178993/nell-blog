@@ -3,7 +3,7 @@ class Api::V1::CommentsController < ApplicationController
     user_posts = current_user.posts.includes(:comments)
     comments_by_post = user_posts.map { |post| { post_id: post.id, comments: post.comments } }
 
-    render json: { success: true, comments_by_post: comments_by_post }
+    render json: { success: true, comments_by_post: }
   end
 
   def create
