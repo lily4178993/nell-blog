@@ -9,10 +9,18 @@ Rails.application.routes.draw do
   # The following routes are for the API.
   namespace :api do
     namespace :v1 do
-      resources :posts, only: [:index]
-      resources :comments, only: [:index, :create]
+      resources :users, only: [:index] do
+        resources :posts, only: [:index] do
+          resources :comments, only: [:index, :create]
+        end
+      end
     end
   end
+  # api/v1/users
+  # api/v1/users/:id
+  # api/v1/users/:id/posts
+  # api/v1/users/:id/posts/:id
+  # api/v1/users/:id/posts/:id/comments
 
   # The following routes are for the web app.
   resources :users, only: [:index, :show] do
